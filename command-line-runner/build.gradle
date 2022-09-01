@@ -6,6 +6,8 @@ plugins {
 }
 
 dependencies {
+
+	implementation("org.graalvm.nativeimage:svm:22.2.0")
 	implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
 	implementation("org.springframework.boot:spring-boot-starter")
 

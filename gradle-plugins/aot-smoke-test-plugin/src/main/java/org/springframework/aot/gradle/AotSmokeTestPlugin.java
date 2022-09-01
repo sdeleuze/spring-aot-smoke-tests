@@ -70,6 +70,7 @@ public class AotSmokeTestPlugin implements Plugin<Project> {
 		SourceSet aotTest = javaExtension.getSourceSets().create("aotTest");
 		javaExtension.setSourceCompatibility(JavaVersion.VERSION_17);
 		javaExtension.setTargetCompatibility(JavaVersion.VERSION_17);
+		//project.getRepositories().mavenLocal();
 		project.getRepositories().mavenCentral();
 		project.getRepositories().maven((repo) -> {
 			repo.setName("Spring Milestone");
@@ -109,6 +110,7 @@ public class AotSmokeTestPlugin implements Plugin<Project> {
 	private void configureNativeImageTests(Project project, SourceSet aotTest, AotSmokeTestExtension extension) {
 		project.getPlugins().withType(NativeImagePlugin.class, (nativeImagePlugin) -> {
 			GraalVMExtension graalVMExtension = project.getExtensions().getByType(GraalVMExtension.class);
+			graalVMExtension.binaries(action -> action.forEach(spec -> spec.getVerbose().set(true)));
 			graalVMExtension.getAgent().getTasksToInstrumentPredicate().set((task) -> false);
 			GraalVMReachabilityMetadataRepositoryExtension metadataRepositoryExtension = ((ExtensionAware) graalVMExtension)
 					.getExtensions().getByType(GraalVMReachabilityMetadataRepositoryExtension.class);
