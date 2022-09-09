@@ -1,6 +1,6 @@
 package com.example.webflux;
 
-import org.springframework.aot.smoketest.thirdpartyhints.NettyRuntimeHints;
+import org.springframework.aot.smoketest.thirdpartyhints.JaxbRuntimeHints;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportRuntimeHints;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@ImportRuntimeHints(NettyRuntimeHints.class)
+@ImportRuntimeHints(JaxbRuntimeHints.class)
 public class WebfluxApplication {
 
 	public static void main(String[] args) {
