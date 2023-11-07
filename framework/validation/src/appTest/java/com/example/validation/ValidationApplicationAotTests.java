@@ -65,4 +65,24 @@ class ValidationApplicationAotTests {
 			.isBadRequest();
 	}
 
+	@Test
+	void controllerValidationWorksWithInheritedClass(WebTestClient client) {
+		client.post()
+				.uri("/inherited-hello")
+				.contentType(MediaType.APPLICATION_JSON)
+				.bodyValue("{\"name\": \"world\"}")
+				.exchange()
+				.expectStatus()
+				.isOk()
+				.expectBody()
+				.consumeWith((result) -> assertThat(new String(result.getResponseBodyContent())).isEqualTo("Inherited Hello world"));
+		client.post()
+				.uri("/inherited-hello")
+				.contentType(MediaType.APPLICATION_JSON)
+				.bodyValue("{\"name\": \"\"}")
+				.exchange()
+				.expectStatus()
+				.isBadRequest();
+	}
+
 }

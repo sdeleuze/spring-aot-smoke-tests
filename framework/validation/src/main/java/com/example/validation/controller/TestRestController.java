@@ -16,6 +16,11 @@ class TestRestController {
 		return "Hello " + dto.getName();
 	}
 
+	@PostMapping(value = "inherited-hello", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String inheritedHello(@Validated @RequestBody InheritedDto dto) {
+		return "Inherited Hello " + dto.getName();
+	}
+
 	static class Dto {
 
 		@NotBlank
@@ -29,6 +34,9 @@ class TestRestController {
 			this.name = name;
 		}
 
+	}
+
+	static class InheritedDto extends Dto {
 	}
 
 }
